@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+#佛祖保佑卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐卐    
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
           /bin/bash -c "
             # 安装基础依赖（去掉sudo，容器内是root）
             apt update
-            apt install -y wget git build-essential gcc g++ make cmake
+            apt install -y wget git build-essential gcc g++ make cmake zlib1g-dev
             
             # 下载并安装 GraalVM
             cd /opt
