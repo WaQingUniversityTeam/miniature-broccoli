@@ -1,0 +1,36 @@
+name: Simple ARM64 Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup QEMU
+      uses: docker/setup-qemu-action@v3
+
+    - name: Build with Maven
+      run: |
+        docker run --rm \
+          --platform linux/arm64 \
+          -v $(pwd):/workspace \
+          -w /workspace \
+          arm64v8/ubuntu:22.04 \
+          /bin/bash -c "
+            apt update && apt install -y curl zip unzip
+            curl -s 'https://get.sdkman.io' | bash
+            source '\$HOME/.sdkman/bin/sdkman-init.sh'
+            sdk install java 25.0.1-graalce
+            sdk use java 25.0.1-graalce
+            mvn clean verify -Pnative
+      "
+    - name: Upload Binary
+      uses: actions/upload-artifact@v4
+      with:
+        name: mvnd-arm64
+        path: client/target/mvnd
