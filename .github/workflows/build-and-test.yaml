@@ -37,8 +37,7 @@ jobs:
             
             # 正确设置环境变量
             export JAVA_HOME=/opt/graalvm-community-jdk-25.0.1_linux-aarch64_bin
-            export PATH=\$JAVA_HOME/bin:\$PATH
-            
+            export PATH=$JAVA_HOME/bin:$PATH
             # 验证环境
             echo '=== Java Version ==='
             java -version
