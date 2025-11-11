@@ -29,11 +29,8 @@ jobs:
             # 下载并安装 GraalVM
             cd /opt
             wget https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-25.0.1/graalvm-community-jdk-25.0.1_linux-aarch64_bin.tar.gz
-            tar -xzf graalvm-community-jdk-25.0.1_linux-aarch64_bin.tar.gz
-            wget -q https://dlcdn.apache.org/maven/maven-3/3.9.11/binaries/apache-maven-3.9.11-bin.tar.gz
-            tar -xzf apache-maven-3.9.11-bin.tar.gz
-            export MAVEN_HOME=/opt/apache-maven-3.9.11
-            export PATH=\$MAVEN_HOME/bin:\$PATH
+            tar -xzf graalvm-community-jdk-25.0.1_linux-aarch64_bin.tar.gz 
+            ls
             
             # 正确设置环境变量
             export JAVA_HOME=/opt/graalvm-community-jdk-25.0.1_linux-aarch64_bin
@@ -47,7 +44,7 @@ jobs:
             # 构建 mvnd（注意仓库名是 maven-mvnd 不是 maven-mwnd）
             cd /workspace
             git clone https://github.com/apache/maven-mvnd.git && cd maven-mvnd
-            mvn clean package -DskipTests -Pnative
+            ./mvnw clean verify -Pnative
           "
 
     - name: Upload Binary
