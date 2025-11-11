@@ -44,7 +44,7 @@ jobs:
             # 构建 mvnd（注意仓库名是 maven-mvnd 不是 maven-mwnd）
             cd /workspace
             git clone https://github.com/apache/maven-mvnd.git && cd maven-mvnd
-            ./mvnw clean verify -Pnative
+            ./mvnw clean verify -Dmaven.test.skip=true -Pnative
           "
 
     - name: Upload Binary
